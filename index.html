@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emile Schoemans · Interactive Resume</title>
+<meta name="description" content="The interactive resume of Emile Schoemans. Click anything highlighted on the resume to see the work behind it.">
+<meta property="og:title" content="Emile Schoemans · Interactive Resume">
+<meta property="og:description" content="Click anything highlighted on the resume to see the work behind it.">
+<meta property="og:image" content="assets/vc-atlas.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffd166'%3EES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ LEFT: THE RESUME ============ -->
+  <main class="cv-col" id="cv">
+    <article class="paper">
+
+      <header class="cv-head">
+        <button class="avatar hot-plain" data-k="me" aria-label="About Emile">
+          <img src="assets/emile.jpg" alt="Emile Schoemans">
+        </button>
+        <div>
+          <h1><button class="name hot-plain" data-k="me">Emile Schoemans</button></h1>
+          <p class="tag">MSc Business Engineering · Market Research · Strategy &amp; Business Analytics</p>
+          <p class="contact">
+            Bruges, Belgium
+            <span>·</span> <a href="mailto:emileschoemans1@gmail.com">emileschoemans1@gmail.com</a>
+            <span>·</span> <a href="https://www.linkedin.com/in/emile-schoemans/" target="_blank" rel="noopener">linkedin.com/in/emile-schoemans</a>
+          </p>
+        </div>
+      </header>
+
+      <div class="hint-inline" id="hintInline">
+        <span class="pulse"></span>
+        <span>Everything <mark class="demo">highlighted</mark> is clickable. Tap it to see the work behind the line.</span>
+      </div>
+
+      <section>
+        <h2>Profile</h2>
+        <p>Business Engineering graduate with experience in cross-border market research, investment prospecting and business analytics. Interested in turning complex evidence into clear recommendations on growth, markets and investment decisions.</p>
+      </section>
+
+      <section>
+        <h2>Built with AI <span class="h2-note">featured work</span></h2>
+        <div class="chips">
+          <button class="chip star" data-k="atlas"><b>★</b> Flanders–US VC Atlas</button>
+          <button class="chip" data-k="crm">CRM cleanup with AI agents</button>
+          <button class="chip" data-k="booth">Booth Finder</button>
+          <button class="chip" data-k="expansion">US Expansion Map</button>
+          <button class="chip" data-k="invites">Event invitations</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Professional experience</h2>
+        <div class="row">
+          <h3><a class="hot" href="#fit" data-k="fit">Flanders Investment &amp; Trade</a> <span class="role">Business Intern, Investment Attraction</span></h3>
+          <span class="date">Sep – Dec 2026</span>
+        </div>
+        <p class="place">New York, United States</p>
+        <ul>
+          <li>Developed a <a class="hot" href="#atlas" data-k="atlas">venture-capital mapping tool</a> to organise investors with previous investments in Flemish start-ups and support sector-specific investor shortlists.</li>
+          <li>Built a <a class="hot" href="#booth" data-k="booth">research and event-navigation tool</a> for a defence industry event with 780 exhibitors, incorporating company screening and AI-generated questions to prepare business conversations.</li>
+          <li>Developing a <a class="hot" href="#expansion" data-k="expansion">US company-mapping and lead-scoring tool</a> using web scraping to help identify potential investors and companies considering expansion to Flanders.</li>
+          <li>Cleaned about 1,900 US accounts in the office CRM in six days with <a class="hot" href="#crm" data-k="crm">AI research agents, written rules and a full audit trail</a>, and turned the pilot into a proposal for headquarters.</li>
+          <li>Designed and published <a class="hot" href="#invites" data-k="invites">web invitations for Belgian brand events</a> in New York.</li>
+          <li>Researched US market-entry opportunities for Flemish businesses, screening prospective partners, clients and North American investors.</li>
+          <li>Attended <a class="hot" href="#climate" data-k="climate">Climate Week NYC and other New York business events</a>, gaining exposure to US industry trends and the investment ecosystem.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Selected business &amp; analytical projects</h2>
+        <div class="row"><h3><a class="hot" href="#hotel" data-k="hotel">California hotel investment feasibility</a> <span class="role">Ghent University</span></h3><span class="date">Group project</span></div>
+        <ul><li>Compared 18 California destinations on market demand, competitive supply, pricing and projected investment returns; team recommended a four-star hotel in Coronado, San Diego.</li></ul>
+        <div class="row"><h3><a class="hot" href="#rail" data-k="rail">Belgian rail network analysis</a> <span class="role">Ghent University</span></h3><span class="date">Group project</span></div>
+        <ul><li>Analysed rail delays, station accessibility and network coverage across 574 Belgian stations; translated data visualisations into operational and infrastructure recommendations.</li></ul>
+        <div class="row"><h3><a class="hot" href="#kaggle" data-k="kaggle">C2C resale pricing challenge</a> <span class="role">Ghent University</span></h3><span class="date">Group project</span></div>
+        <ul><li>Placed second in a course Kaggle competition, using structured and text-derived features to predict resale prices and understand key pricing drivers.</li></ul>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="row"><h3><a class="hot" href="#ugent" data-k="ugent">Ghent University</a> <span class="role">MSc Business Engineering, Data Analytics</span></h3><span class="date">2024 – Sep 2026</span></div>
+        <ul><li><a class="hot" href="#thesis" data-k="thesis">Master's thesis with Skeyes</a>: evaluated airport fleet-scheduling decisions using mathematical optimisation and scenario analysis, balancing analytical rigour with operational constraints.</li></ul>
+        <div class="row"><h3><a class="hot" href="#ugent" data-k="ugent">Ghent University</a> <span class="role">BSc Business Engineering</span></h3><span class="date">2020 – Jan 2025</span></div>
+        <p class="place"><a class="hot" href="#zagreb" data-k="zagreb">University of Zagreb</a>, international exchange, Faculty of Economics &amp; Business (Sep 2024 – Jan 2025)</p>
+      </section>
+
+      <section>
+        <h2>Leadership &amp; skills</h2>
+        <div class="row"><h3><a class="hot" href="#scouts" data-k="scouts">Sea Scouts De Boekaniers</a> <span class="role">Scout Leader &amp; Head Sailing Instructor</span></h3><span class="date">2019 – 2026</span></div>
+        <ul><li>Led 15 instructors delivering an advanced sailing programme for 200+ children, coordinating activities and mentoring teams.</li></ul>
+        <dl class="skills">
+          <dt>Business &amp; analytical</dt><dd>Market and company research; investor screening; commercial analysis; data visualisation; quantitative problem-solving; Excel and PowerPoint.</dd>
+          <dt>Technical</dt><dd>Python; R (academic experience); SQL (fundamentals); machine learning; <a class="hot" href="#howai" data-k="howai">AI-assisted research workflows</a>; GitHub, Supabase and Vercel.</dd>
+          <dt>Languages</dt><dd>Dutch (native); English (fluent); French (fluent).</dd>
+          <dt>Interests</dt><dd><a class="hot" href="#thesis" data-k="thesis">Aviation</a>, <a class="hot" href="#scouts" data-k="scouts">sailing</a>, long-distance running, sports analytics, music and travel.</dd>
+        </dl>
+      </section>
+
+      <footer class="cv-foot">
+        <a class="btn ghost" href="assets/Emile_Schoemans_CV.pdf" target="_blank" rel="noopener">Download the classic PDF</a>
+        <span id="progress" class="progress" aria-live="polite"></span>
+      </footer>
+    </article>
+  </main>
+
+  <!-- ============ RIGHT: THE STAGE ============ -->
+  <aside class="stage-col" id="stageCol" aria-label="Work viewer">
+    <div class="window">
+      <div class="win-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="win-title" id="winTitle">interactive-resume</span>
+        <span class="win-actions">
+          <button id="prevBtn" title="Previous" aria-label="Previous item">‹</button>
+          <button id="nextBtn" title="Next" aria-label="Next item">›</button>
+          <button id="homeBtn" title="Back to start" aria-label="Back to start">⌂</button>
+          <button id="closeBtn" class="only-mobile" title="Close" aria-label="Close">✕</button>
+        </span>
+      </div>
+      <div class="win-body" id="stage" tabindex="-1"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="lightbox" id="lightbox" hidden><img alt=""><button aria-label="Close image">✕</button></div>
+
+<script src="app.js"></script>
+</body>
+</html>
