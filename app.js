@@ -10,23 +10,53 @@ const photo = (src, alt, cls = "") =>
 const ext = (href, label, cls = "") =>
   `<a class="btn ${cls}" href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
 
+// A slide viewer: items are [file in assets/slides, caption]
+const deck = (items) => `
+  <div class="deck" data-deck='${JSON.stringify(items).replace(/'/g, "&#39;")}'>
+    <button class="deck-main" data-zoom="${A}slides/${items[0][0]}"><img src="${A}slides/${items[0][0]}" alt=""></button>
+    <div class="deck-bar">
+      <button class="deck-nav" data-d="-1" aria-label="Previous slide">‹</button>
+      <span class="deck-cap"></span>
+      <button class="deck-nav" data-d="1" aria-label="Next slide">›</button>
+    </div>
+    <div class="deck-thumbs">${items.map((it, i) => `<button data-i="${i}" aria-label="Slide ${i + 1}"><img src="${A}slides/${it[0]}" alt="" loading="lazy"></button>`).join("")}</div>
+  </div>`;
+function initDecks(root) {
+  root.querySelectorAll("[data-deck]").forEach(el => {
+    const items = JSON.parse(el.dataset.deck); let i = 0;
+    const main = el.querySelector(".deck-main"), cap = el.querySelector(".deck-cap"), thumbs = [...el.querySelectorAll(".deck-thumbs button")];
+    const go = n => {
+      i = (n + items.length) % items.length;
+      main.dataset.zoom = A + "slides/" + items[i][0];
+      main.querySelector("img").src = A + "slides/" + items[i][0];
+      main.querySelector("img").alt = items[i][1];
+      cap.textContent = `${i + 1} / ${items.length} · ${items[i][1]}`;
+      thumbs.forEach((t, k) => t.classList.toggle("on", k === i));
+    };
+    el.querySelectorAll(".deck-nav").forEach(b => b.addEventListener("click", () => go(i + +b.dataset.d)));
+    thumbs.forEach(t => t.addEventListener("click", () => go(+t.dataset.i)));
+    go(0);
+  });
+}
+
 const VIEWS = {
   me: {
     title: "about-emile",
     html: () => `
-      <p class="eyebrow">Hello</p>
-      <h2 class="title">I'm Emile.</h2>
+      <p class="eyebrow">About</p>
+      <h2 class="title">Emile Schoemans</h2>
       <div class="me">
         <button class="portrait" data-zoom="${A}emile.jpg"><img src="${A}emile.jpg" alt="Emile Schoemans in the New York office"></button>
         <div>
-          <p class="lede">Business engineer from Bruges, currently in New York for Flanders Investment &amp; Trade. I like questions where the evidence is messy and somebody still has to decide.</p>
-          <ul class="facts">
-            <li><span>🧭</span><span>Market research, investor screening and business analytics.</span></li>
-            <li><span>🤖</span><span>I build small tools with AI so colleagues can use the research, not just read it.</span></li>
-            <li><span>⛵</span><span>Seven years leading sea scouts and running a sailing programme for 200+ children.</span></li>
-            <li><span>✈️</span><span>Aviation fan: my master's thesis was about towing aircraft to the runway with the engines off.</span></li>
-            <li><span>🗣️</span><span>Dutch, English and French.</span></li>
-          </ul>
+          <p>I hold an MSc in Business Engineering (Data Analytics) from Ghent University and currently work as a business intern in investment attraction at Flanders Investment &amp; Trade in New York.</p>
+          <p>My work combines market and company research with data analysis: screening investors and companies, building the datasets behind that screening, and presenting the results so that colleagues can act on them. During the internship I built several tools for the office with the help of AI; they are shown on this site.</p>
+          <p>Outside work, I was a scout leader and head sailing instructor at Sea Scouts De Boekaniers for seven years.</p>
+          <dl class="kv">
+            <dt>Education</dt><dd>MSc and BSc Business Engineering, Ghent University</dd>
+            <dt>Current role</dt><dd>Business Intern, Flanders Investment &amp; Trade, New York</dd>
+            <dt>Languages</dt><dd>Dutch (native), English and French (fluent)</dd>
+            <dt>Based in</dt><dd>Bruges, Belgium</dd>
+          </dl>
           <div class="actions">
             ${ext("https://www.linkedin.com/in/emile-schoemans/", "LinkedIn")}
             <a class="btn ghost" href="mailto:emileschoemans1@gmail.com">Email me</a>
@@ -346,13 +376,34 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
       <p class="eyebrow">Group project · Ghent University</p>
       <h2 class="title">California hotel investment feasibility</h2>
       <p class="lede">Where in California should an investor build a hotel, and what kind? We compared destinations on demand, supply, pricing and returns, and ended with one recommendation.</p>
+      ${deck([
+        ["hotel-01.jpg", "The business presentation, styled as a hotel guide for the client in the case"],
+        ["hotel-05.jpg", "Screening 18 destinations down to four regions"],
+        ["hotel-03.jpg", "Hedonic pricing model: what an extra star is worth in each destination"],
+        ["hotel-07.jpg", "Three finalist hubs in two markets"],
+        ["hotel-24.jpg", "The investment case per hub: ROI, EBITDA per room, payback, land cost"],
+        ["hotel-26.jpg", "Risk-adjusted return against payback period"],
+        ["hotel-27.jpg", "Scoring the finalists on four criteria"],
+        ["hotel-28.jpg", "The recommendation: a four-star resort on Coronado Island"]
+      ])}
       <div class="stats">
-        <div class="stat"><b>18</b><span>California destinations compared</span></div>
-        <div class="stat"><b>4</b><span>lenses: demand, supply, pricing, returns</span></div>
-        <div class="stat hi"><b>Coronado</b><span>San Diego: a four-star hotel</span></div>
+        <div class="stat"><b>18</b><span>California destinations screened</span></div>
+        <div class="stat"><b>3,082</b><span>hotels in the pricing model</span></div>
+        <div class="stat"><b>39</b><span>candidate hubs scored</span></div>
+        <div class="stat hi"><b>8.8%</b><span>demand-adjusted ROI for the recommended site</span></div>
       </div>
-      <div class="flow"><span>18 destinations</span><i>→</i><span>Market demand</span><i>→</i><span>Competitive supply</span><i>→</i><span>Pricing</span><i>→</i><span>Projected returns</span><i>→</i><span>1 recommendation</span></div>
-      <p class="note">Happy to walk through the analysis in a conversation.</p>`
+      <h4>Approach</h4>
+      <div class="flow"><span>Hedonic pricing</span><i>→</i><span>ROI optimisation</span><i>→</i><span>Hub clustering</span><i>→</i><span>Revenue prediction</span><i>→</i><span>Demand-adjusted ROI</span></div>
+      <ul>
+        <li><b>Market screening:</b> a hedonic pricing model per destination estimated the rate premium of each star level; a linear programme combined these with construction costs and occupancy to rank destination and star combinations on ROI.</li>
+        <li><b>Site identification:</b> density-based clustering (DBSCAN) grouped existing hotels into 39 tourism hubs across San Diego, Napa Valley and Inyo.</li>
+        <li><b>Revenue prediction:</b> a gradient boosting model (CatBoost), trained on 802 hotels with location, competition and points-of-interest features, predicted annual revenue per room for each hub.</li>
+        <li><b>Investment case:</b> predicted revenue was combined with construction and land costs, then discounted for supply tightness, occupancy trend and seasonality.</li>
+      </ul>
+      <h4>Recommendation</h4>
+      <p>A four-star resort on Coronado Island, San Diego: about $49k EBITDA per room, a 10.4-year payback, stable year-round demand and a peninsula that limits future supply. East Village scored a higher ROI (9.2%) in a far more crowded market; Yountville in Napa Valley had the highest room rates but strong seasonality.</p>
+      <p class="note">Course: Predictive and Prescriptive Analytics, 2025–2026, in collaboration with Lighthouse. Team of five. The client in the case was fictional.</p>
+      <div class="tags"><span>Python</span><span>Regression</span><span>Linear programming</span><span>CatBoost</span><span>DBSCAN</span></div>`
   },
 
   rail: {
@@ -361,12 +412,38 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
       <p class="eyebrow">Group project · Ghent University</p>
       <h2 class="title">Belgian rail network analysis</h2>
       <p class="lede">A data-visualisation project on how well the Belgian rail network serves its passengers: where trains run late, which stations are hard to reach, and where coverage is thin.</p>
+      ${deck([
+        ["rail-03.jpg", "The network: 574 stations and 256 unique routes"],
+        ["rail-08.jpg", "Average delay at arrival per route: 8% of routes account for almost 20% of the delay"],
+        ["rail-09.jpg", "Incidents cause about 14% of the total weekly delay"],
+        ["rail-26.jpg", "Ticket sales and delays per hour: 65% of travellers travel in the rush periods"],
+        ["rail-34.jpg", "Spillover of the priority rule for intercity trains on local trains"],
+        ["rail-41.jpg", "Areas further than 7 km from a station"],
+        ["rail-43.jpg", "Stations against population per province"],
+        ["rail-45.jpg", "Conclusions per leg of the journey"]
+      ])}
       <div class="stats">
-        <div class="stat hi"><b>574</b><span>Belgian stations analysed</span></div>
-        <div class="stat"><b>3</b><span>angles: delays, accessibility, coverage</span></div>
+        <div class="stat hi"><b>574</b><span>stations and 256 routes analysed</span></div>
+        <div class="stat"><b>8%</b><span>of routes cause almost 20% of the average delay</span></div>
+        <div class="stat"><b>14%</b><span>of weekly delay comes from incidents</span></div>
+        <div class="stat"><b>24</b><span>main hubs identified by clustering</span></div>
       </div>
-      <div class="flow"><span>Delay data</span><i>+</i><span>Station accessibility</span><i>+</i><span>Network coverage</span><i>→</i><span>Visualisations</span><i>→</i><span>Operational &amp; infrastructure recommendations</span></div>
-      <p class="note">Happy to walk through the analysis in a conversation.</p>`
+      <h4>Approach</h4>
+      <p>We presented the analysis as one traveller's journey from Bruges via Kortrijk and Antwerp to Herentals, using each leg to examine a different problem in open data from Infrabel and NMBS.</p>
+      <ul>
+        <li><b>Delays:</b> delay at arrival per route and per hour, the share caused by incidents, and the additional delay created at individual stations.</li>
+        <li><b>Operations:</b> the effect of giving intercity trains priority over local trains, including the knock-on delay for trains that follow.</li>
+        <li><b>Accessibility:</b> station facilities in larger cities, and areas more than 7 km from a station compared with population per municipality.</li>
+      </ul>
+      <h4>Recommendations</h4>
+      <ul>
+        <li>Add buffer time on the Bruges–Kortrijk line, where incidents have the largest effect.</li>
+        <li>Proceed with the renovation of Kortrijk station to improve connections and accessibility.</li>
+        <li>Review the intercity priority rule, which in some cases delays local trains without benefit.</li>
+        <li>Improve coverage in the province of Antwerp and in West Flanders, where the number of stations is low relative to population.</li>
+      </ul>
+      <p class="note">Group assignment at Ghent University, autumn 2025. Team of five.</p>
+      <div class="tags"><span>Python</span><span>Data visualisation</span><span>Geospatial analysis</span><span>Clustering</span></div>`
   },
 
   kaggle: {
@@ -376,11 +453,26 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
       <h2 class="title">C2C resale pricing challenge</h2>
       <p class="lede">Predict what a second-hand item will sell for on a consumer-to-consumer platform, and explain what drives the price.</p>
       <div class="stats">
-        <div class="stat hi"><b>🥈 2nd</b><span>place in the course Kaggle competition</span></div>
-        <div class="stat"><b>Text + data</b><span>structured features combined with features from listing text</span></div>
+        <div class="stat hi"><b>2nd</b><span>place in the course Kaggle competition</span></div>
+        <div class="stat"><b>13</b><span>model types compared on validation error</span></div>
+        <div class="stat"><b>23.7</b><span>RMSE of the final ensemble, against 34.5 for linear regression</span></div>
       </div>
-      <div class="flow"><span>Listings</span><i>→</i><span>Structured features</span><i>+</i><span>Text-derived features</span><i>→</i><span>Price model</span><i>→</i><span>Key pricing drivers</span></div>
-      <div class="tags"><span>Machine learning</span><span>Python</span><span>Feature engineering</span></div>`
+      <h4>The poster</h4>
+      <figure><button class="shot crop" data-zoom="${A}slides/poster.jpg"><img src="${A}slides/poster.jpg" alt="Project poster: price suggestion prediction for online resale" loading="lazy"></button></figure>
+      <h4>Approach</h4>
+      <ul>
+        <li><b>Features:</b> the category field split into family, group and subgroup; price statistics per brand and category; brand tiers; description length; and TF-IDF features from titles and descriptions.</li>
+        <li><b>Models:</b> thirteen approaches compared, from linear regression to gradient boosting. LASSO feature selection followed by a neural network performed best as a single model (RMSE 24.1); an ensemble with gradient boosting reached 23.7.</li>
+        <li><b>Drivers:</b> listing text had the largest influence on the predicted price, followed by brand and product subgroup.</li>
+      </ul>
+      <h4>Recommendations to the platform</h4>
+      <ul>
+        <li>Standardise brand and condition input, since both drive price and are often entered inconsistently.</li>
+        <li>Show sellers a suggested price range instead of a single number.</li>
+        <li>Collect original retail price and product age to model depreciation.</li>
+      </ul>
+      <p class="note">Course: Machine Learning, Ghent University. Team of four.</p>
+      <div class="tags"><span>Python</span><span>Feature engineering</span><span>TF-IDF</span><span>Neural networks</span><span>Gradient boosting</span></div>`
   },
 
   scouts: {
@@ -388,18 +480,18 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
     html: () => `
       <p class="eyebrow">2019 – 2026 · Belgium</p>
       <h2 class="title">Sea Scouts De Boekaniers</h2>
-      <p class="lede">Scout leader and head sailing instructor. Seven years of teaching children to sail, and of learning how to run a team of volunteers when the wind does not follow the plan.</p>
+      <p class="lede">Scout leader and head sailing instructor. For seven years I taught children to sail and coordinated a team of volunteer instructors.</p>
       <figure>${photo("sailing.jpg", "Young sailors in small dinghies with colourful sails", "wide")}</figure>
       <div class="stats">
         <div class="stat hi"><b>15</b><span>instructors led</span></div>
         <div class="stat"><b>200+</b><span>children in the advanced sailing programme</span></div>
         <div class="stat"><b>7 yrs</b><span>as a leader</span></div>
       </div>
-      <h4>What it taught me</h4>
+      <h4>Responsibilities</h4>
       <ul>
-        <li>Planning for many people with safety first, then adapting on the water.</li>
-        <li>Mentoring new instructors until they can run a session themselves.</li>
-        <li>Explaining something technical to a ten-year-old. Harder than a board presentation.</li>
+        <li>Planning and running the advanced sailing programme, with safety on the water as the first priority.</li>
+        <li>Leading and mentoring a team of 15 instructors.</li>
+        <li>Coordinating activities and camps as a scout leader.</li>
       </ul>
       <div class="actions">${ext("https://www.deboekaniers.be/", "Visit De Boekaniers")}</div>`
   },
@@ -464,6 +556,7 @@ function show(key, push = true) {
   winTitle.textContent = v ? v.title : "interactive-resume";
   stage.scrollTop = 0;
   if (v && v.init) v.init(stage);
+  initDecks(stage);
   if (v) seen.add(key);
   document.querySelectorAll(".cv-col [data-k]").forEach(b => {
     b.classList.toggle("on", b.dataset.k === current);

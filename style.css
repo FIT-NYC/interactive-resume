@@ -233,3 +233,20 @@ a.hot{color:inherit;text-decoration:none;cursor:pointer}
 .tile.big .thumb img{position:absolute;inset:0}
 .photo.wide{aspect-ratio:16/8}
 @media (max-width:940px){.tile.big .thumb{min-height:170px;flex:none}}
+
+/* slide viewer */
+.deck{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--night);margin:4px 0 16px}
+.deck-main{display:block;width:100%;cursor:zoom-in;background:#000}
+.deck-main img{width:100%;aspect-ratio:16/9;object-fit:contain}
+.deck-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;color:#d7e0f5;font-size:13px}
+.deck-cap{flex:1;min-width:0}
+.deck-nav{width:32px;height:30px;border-radius:8px;background:rgba(255,255,255,.12);color:#fff;font-size:18px;line-height:1;flex:none}
+.deck-nav:hover{background:var(--accent)}
+.deck-thumbs{display:flex;gap:6px;padding:0 10px 10px;overflow-x:auto;scrollbar-width:thin}
+.deck-thumbs button{flex:none;width:86px;border-radius:6px;overflow:hidden;opacity:.55;border:2px solid transparent;transition:.2s}
+.deck-thumbs button:hover{opacity:.9}
+.deck-thumbs button.on{opacity:1;border-color:var(--gold)}
+.deck-thumbs img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:16px 0 4px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}
+.kv dt{color:var(--ink-3);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+.kv dd{margin:0}
