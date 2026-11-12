@@ -250,3 +250,6 @@ a.hot{color:inherit;text-decoration:none;cursor:pointer}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:16px 0 4px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}
 .kv dt{color:var(--ink-3);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
 .kv dd{margin:0}
+
+.phones.three{gap:12px}
+.phones.three .phone{width:min(31%,220px);border-width:6px;border-radius:22px}

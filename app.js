@@ -48,11 +48,11 @@ const VIEWS = {
       <div class="me">
         <button class="portrait" data-zoom="${A}emile.jpg"><img src="${A}emile.jpg" alt="Emile Schoemans in the New York office"></button>
         <div>
-          <p>I hold an MSc in Business Engineering (Data Analytics) from Ghent University and currently work as a business intern in investment attraction at Flanders Investment &amp; Trade in New York.</p>
+          <p>I hold an MSc in Business Engineering from Ghent University, where I majored in Data Analytics, and currently work as a business intern in investment attraction at Flanders Investment &amp; Trade in New York.</p>
           <p>My work combines market and company research with data analysis: screening investors and companies, building the datasets behind that screening, and presenting the results so that colleagues can act on them. During the internship I built several tools for the office with the help of AI; they are shown on this site.</p>
-          <p>Outside work, I was a scout leader and head sailing instructor at Sea Scouts De Boekaniers for seven years.</p>
+          <p>Outside work, I was a scout leader at Sea Scouts De Boekaniers until this summer and a sailing instructor at Sport Vlaanderen Nieuwpoort.</p>
           <dl class="kv">
-            <dt>Education</dt><dd>MSc and BSc Business Engineering, Ghent University</dd>
+            <dt>Education</dt><dd>MSc Business Engineering (major in Data Analytics) and BSc Business Engineering, Ghent University</dd>
             <dt>Current role</dt><dd>Business Intern, Flanders Investment &amp; Trade, New York</dd>
             <dt>Languages</dt><dd>Dutch (native), English and French (fluent)</dd>
             <dt>Based in</dt><dd>Bruges, Belgium</dd>
@@ -168,8 +168,9 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
       <p class="eyebrow">Mobile web app · AUSA 2026, Washington DC</p>
       <h2 class="title">Booth Finder</h2>
       <p class="lede">A defence trade show with 780 exhibitors and three days to talk to the right ones. I screened the exhibitor list, scored the companies on their fit with Flanders, and put the result in my colleagues' pockets.</p>
-      <div class="phones">
-        <button class="phone" data-zoom="${A}booth-wide.png"><img src="${A}booth-list.png" alt="Booth Finder company list" loading="lazy"></button>
+      <div class="phones three">
+        <button class="phone" data-zoom="${A}booth-list.png"><img src="${A}booth-list.png" alt="Booth Finder company list" loading="lazy"></button>
+        <button class="phone" data-zoom="${A}booth-map.png"><img src="${A}booth-map.png" alt="Booth Finder map tab with company pins on the exhibition floor plan" loading="lazy"></button>
         <button class="phone" data-zoom="${A}booth-detail.png"><img src="${A}booth-detail.png" alt="Booth Finder company detail with the question to ask at the booth" loading="lazy"></button>
       </div>
       <div class="stats">
@@ -181,6 +182,7 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
       <ul>
         <li>Search by company, booth number or topic; filter by sector, priority tier and hall.</li>
         <li>Each company opens with the question to ask at the booth, the case for Flanders and who to talk to.</li>
+        <li>A floor map with a pin for every shortlisted company, coloured by priority tier.</li>
         <li>"My route": star companies, set meeting times, tick off visits and keep notes, shared live between laptop and phone.</li>
         <li>The online version holds public business information only; internal notes never leave the office.</li>
       </ul>
@@ -480,7 +482,7 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
     html: () => `
       <p class="eyebrow">2019 – 2026 · Belgium</p>
       <h2 class="title">Sea Scouts De Boekaniers</h2>
-      <p class="lede">Scout leader and head sailing instructor. For seven years I taught children to sail and coordinated a team of volunteer instructors.</p>
+      <p class="lede">Scout leader at Sea Scouts De Boekaniers until summer 2026, and sailing instructor at Sport Vlaanderen Nieuwpoort, teaching children to sail and coordinating a team of instructors.</p>
       <figure>${photo("sailing.jpg", "Young sailors in small dinghies with colourful sails", "wide")}</figure>
       <div class="stats">
         <div class="stat hi"><b>15</b><span>instructors led</span></div>
