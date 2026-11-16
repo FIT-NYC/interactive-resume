@@ -352,7 +352,7 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
             <li><span>🎓</span><span><b>MSc Business Engineering, Data Analytics</b><br>2024 – Sep 2026</span></li>
             <li><span>📘</span><span><b>BSc Business Engineering</b><br>2020 – Jan 2025</span></li>
             <li><span>✈️</span><span>Master's thesis with Skeyes on scheduling a small fleet of taxibots at Brussels Airport.</span></li>
-            <li><span>🌍</span><span>One semester on exchange at the University of Zagreb.</span></li>
+            <li><span>🌍</span><span>First semester of the master on exchange at the University of Zagreb.</span></li>
           </ul>
           <div class="actions">
             ${ext("https://www.ugent.be/eb/en", "Faculty of Economics and Business Administration")}
@@ -367,7 +367,7 @@ CHANGE | account | field | new value | H/M/L | source URL | reason</pre>
     html: () => `
       <p class="eyebrow">Sep 2024 – Jan 2025 · Zagreb, Croatia</p>
       <h2 class="title">University of Zagreb</h2>
-      <p class="lede">International exchange semester at the Faculty of Economics &amp; Business, during the final semester of my bachelor. The faculty's own website is live below.</p>
+      <p class="lede">International exchange semester at the Faculty of Economics &amp; Business, during the first semester of my master's. The faculty's own website is live below.</p>
       <div class="embed"><iframe src="https://www.efzg.unizg.hr/en" title="Faculty of Economics and Business, University of Zagreb" loading="lazy"></iframe></div>
       <div class="actions">${ext("https://www.efzg.unizg.hr/en", "Open the faculty website", "ghost")}</div>`
   },
